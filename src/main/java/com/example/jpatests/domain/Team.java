@@ -1,6 +1,7 @@
 package com.example.jpatests.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -9,14 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Member {
+public class Team {
     @Id
     private Long id;
 
     private String name;
-
-    @JoinColumn(name="TEAM_ID")
-    @ManyToOne
-    private Team team;
-
 }

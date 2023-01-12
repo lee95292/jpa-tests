@@ -24,8 +24,12 @@ public class CacheTest {
         memberRepository.save(m1);
     }
 
+    /*
+    * 하나의 스레드에서 find-flush-find, 일차캐시를 사용할까?
+    * JPA는 1차 조회 이후 엔티티를 영속성 매니저에 저장한다.
+    * */
     @Test
-    @DisplayName("하나의 스레드에서 두 번 find했을 때, 일차캐시를 사용할까?")
+    @DisplayName("하나의 스레드에서 find-flush-find 했을 때, 일차캐시를 사용할까?")
     public void testCache(){
         memberRepository.findById(1L);
         memberRepository.flush();
