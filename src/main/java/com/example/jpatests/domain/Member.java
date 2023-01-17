@@ -3,9 +3,11 @@ package com.example.jpatests.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,8 +17,11 @@ public class Member {
 
     private String name;
 
-    @JoinColumn(name="TEAM_ID")
     @ManyToOne
     private Team team;
+
+    public void setTeam(Team team){
+        this.team = team;
+    }
 
 }
