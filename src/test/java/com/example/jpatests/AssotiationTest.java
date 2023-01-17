@@ -39,19 +39,26 @@ public class AssotiationTest {
         teamRepository.deleteAll();
     }
 
+    /*
+        1. 영속상태가 아닌 엔티티도 연관관계 설정 후 영속시킬 수 있다.
+        2. repository.save와 entitimanager.persist는 다른 동작을 한다. 어떻게 다른가..?
+     */
     @Test
     @DisplayName("영속 엔티티의 연관관계에 영속되지 않은 엔티티를 저장하면 어떻게될까?[비교, 정상동작]")
-    public void saveNotPersitedCompare(){
-        Member member= Member.builder().id(1L).name("mklee").build();
-        memberRepository.save(member);
+    public void saveNotPersitedCompare() {
+        Member member = Member.builder().id(1L).name("mklee").build();
 
         Team team = Team.builder().id(1L).name("name").build();
 
         //[ 연관관계 설정 및 영속성 컨텍스트에 올바르게 저장 ]
-        teamRepository.save(team);
+        //Repository를 통해 save하는 경우, 예상한대로 동작하지 않음.
+//        teamRepository.save(team);
+//        memberRepository.save(member);
         member.setTeam(team);
+        em.persist(team);
+        em.persist(member);
 
-        //트랜잭션 종료, 변경감지 및 쓰기지연을 통한 update쿼리 전달
+        //트랜잭션 종료, 변경감지 및 쓰기지연을 통한 insert쿼리 전달
         //영속성 컨텍스트를 비우고, 새로 맴버 객체 불러옴
         memberRepository.flush();
         teamRepository.flush();
@@ -62,47 +69,5 @@ public class AssotiationTest {
         team = member.getTeam();
         Assert.notNull(team, "연관관계 존재");
     }
-
-    @Test
-    @DisplayName("영속 엔티티의 연관관계에 영속되지 않은 엔티티를 저장하면 어떻게될까?[실험]")
-    public void saveNotPersitedTest(){
-        Member member= Member.builder().id(1L).name("mklee").build();
-        memberRepository.save(member);
-
-        Team team = Team.builder().id(1L).name("name").build();
-
-        // [ 멤버와의 연관관계 설정 후 엔티티 정보 등록 ]
-        member.setTeam(team);
-        teamRepository.save(team);
-
-        //변경감지 및 쓰기지연을 통한 update쿼리 전달
-        memberRepository.flush();
-
-        //영속성 컨텍스트를 비우고, 새로 멤버 객체 불러옴
-        em.clear();
-        member = memberRepository.findById(1L).orElseThrow();
-        Assert.notNull(member.getTeam(), "연관관계 존재");
-    }
-
-    @Test
-    @DisplayName("영속 엔티티의 연관관계에 영속되지 않은 엔티티를 저장하면 어떻게될까?[실험]")
-    public void saveNotPersitedTest2(){
-        Member member= Member.builder().id(1L).name("mklee").build();
-        memberRepository.save(member);
-
-        Team team = Team.builder().id(1L).name("name").build();
-
-
-        // [ 연관 엔티티를 영속성 컨텍스트에 저장하지 않음 ]
-        member.setTeam(team);
-
-        //트랜잭션 종료, 변경감지 및 쓰기지연을 통한 update쿼리 전달
-        memberRepository.flush();
-
-        //영속성 컨텍스트를 비우고, 새로 멤버 객체 불러옴
-        em.clear();
-        Assert.notNull(member.getTeam(), "연관관계 존재");
-    }
-
 
 }
