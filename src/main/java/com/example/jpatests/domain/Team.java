@@ -1,9 +1,6 @@
 package com.example.jpatests.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,6 @@ public class Team {
 
     private String name;
 
-    @OneToMany
+    @OneToMany @JoinColumn(name="team_id")
     private List<Member> members;
 }
