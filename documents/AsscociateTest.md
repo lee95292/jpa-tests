@@ -1,6 +1,6 @@
-## 연관관계 매핑과 관련된 실험 정리
+# 연관관계 매핑과 관련된 실험 정리
 
-1. OneToMany 단방향인 경우 JoinTable과 JoinColumn 각각 테이블이 어떻게 생성될까?
+### OneToMany 단방향인 경우 JoinTable과 JoinColumn 각각 테이블이 어떻게 생성될까?
 
 1.1 [실험설정커밋, JoinTable 버전](https://github.com/lee95292/jpa-tests/commit/d66afa18545a51f72c1d52c82440e1b449c86a2e)
 <details>
