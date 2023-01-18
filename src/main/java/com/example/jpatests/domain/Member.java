@@ -17,11 +17,11 @@ public class Member {
 
     private String name;
 
-    @ManyToOne
-    private Team team;
-
-    public void setTeam(Team team){
-        this.team = team;
-    }
+//    @ManyToOne
+//    private Team team;
+//
+//    public void setTeam(Team team){
+//        this.team = team;
+//    }
 
 }

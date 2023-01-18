@@ -26,11 +26,11 @@ public class Controller {
 
     @GetMapping("/save-test")
     public ResponseEntity<?> save(){
-        Team team = Team.builder().id(1L).name("teamA").build();
-        Member member=  Member.builder().id(1L).name("mklee").team(team).build();
-        teamRepository.save(team);
-        memberRepository.save(member);
-
-        return ResponseEntity.ok().body(member);
+//        Team team = Team.builder().id(1L).name("teamA").build();
+//        Member member=  Member.builder().id(1L).name("mklee").team(team).build();
+//        teamRepository.save(team);
+//        memberRepository.save(member);
+        return ResponseEntity.ok().body(new Member());
+//        return ResponseEntity.ok().body(member);
     }
 }

@@ -20,4 +20,6 @@ public class Team {
 
     private String name;
 
+    @OneToMany
+    private List<Member> members;
 }
