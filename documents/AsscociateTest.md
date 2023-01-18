@@ -96,9 +96,11 @@ public class Member {
 </details>
 아래와 같이 설정 후 애플리케이션 실행.  
 Team: OneToMany로 members가짐.   
-Member: 연관필드 없음.  
-실험결과 
-1. member 엔티티에 team_id 컬럼이 생긴다 ( 엔티티에는 넣지 않은)
+Member: 연관필드 없음. 
+
+실험결과
+
+1. member 엔티티에 team_id 컬럼이 생긴다 ( 엔티티에는 넣지 않은)   
 2. member에 외래 키 제약조건을 추가한다.
    (JoinColumn은 외래키를 매핑해주는 역할을 하며, 자동으로 Many쪽에 외래키를 생성해준다.)
 
