@@ -35,7 +35,11 @@ Hibernate:
        references team
 ```
 
-
+[실험설정 커밋, JoinColumn버전](https://github.com/lee95292/jpa-tests/commit/5bc2ebe54a672ee4c708b964120af32d42a921a6)
+실험결과 
+1. member 엔티티에 team_id 컬럼이 생긴다 ( 엔티티에는 넣지 않은)
+2. member에 외래 키 제약조건을 추가한다.
+   (JoinColumn은 외래키를 매핑해주는 역할을 하며, 자동으로 Many쪽에 외래키를 생성해준다.)
 ```shell
     create table member (
        id bigint not null,
@@ -57,6 +61,7 @@ Hibernate:
        foreign key (team_id) 
        references team
 ```
+
 ### Pending
 1. 영속상태가 아닌 엔티티는 연관관계 설정할 때 무슨일이 벌어지는가?
 
